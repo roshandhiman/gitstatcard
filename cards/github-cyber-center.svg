@@ -1,0 +1,206 @@
+<svg
+    width="600"
+    height="320"
+    viewBox="0 0 600 320"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <defs>
+        <!-- Clip Paths -->
+        <clipPath id="cardClip">
+            <rect x="0" y="0" width="600" height="320" rx="20" />
+        </clipPath>
+
+        <clipPath id="profileClipCenter">
+            <circle cx="300" cy="95" r="44" />
+        </clipPath>
+
+        <!-- Glow Filters -->
+        <filter id="cyanGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feFlood flood-color="#00f0ff" flood-opacity="0.7" result="color" />
+            <feComposite in="color" in2="blur" operator="in" result="glowColor" />
+            <feMerge>
+                <feMergeNode in="glowColor" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+
+        <filter id="magentaGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feFlood flood-color="#ec4899" flood-opacity="0.7" result="color" />
+            <feComposite in="color" in2="blur" operator="in" result="glowColor" />
+            <feMerge>
+                <feMergeNode in="glowColor" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+
+        <filter id="textGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+
+        <filter id="ambientSpotlight" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="35" result="blur" />
+        </filter>
+
+        <!-- Gradients -->
+        <linearGradient id="animatedBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00f0ff">
+                <animate attributeName="stop-color" values="#00f0ff;#ec4899;#a855f7;#00f0ff" dur="6s" repeatCount="indefinite" />
+            </stop>
+            <stop offset="50%" stop-color="#3b82f6" />
+            <stop offset="100%" stop-color="#ec4899">
+                <animate attributeName="stop-color" values="#ec4899;#00f0ff;#a855f7;#ec4899" dur="6s" repeatCount="indefinite" />
+            </stop>
+        </linearGradient>
+
+        <linearGradient id="cyanMagentaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00f0ff" />
+            <stop offset="100%" stop-color="#ec4899" />
+        </linearGradient>
+
+        <radialGradient id="centerAura" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.35" />
+            <stop offset="60%" stop-color="#ec4899" stop-opacity="0.15" />
+            <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+        </radialGradient>
+
+        <linearGradient id="heroBoxLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.12" />
+            <stop offset="100%" stop-color="#0f172a" stop-opacity="0.7" />
+        </linearGradient>
+
+        <linearGradient id="heroBoxRight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ec4899" stop-opacity="0.12" />
+            <stop offset="100%" stop-color="#0f172a" stop-opacity="0.7" />
+        </linearGradient>
+
+        <linearGradient id="bottomPanelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b" stop-opacity="0.6" />
+            <stop offset="100%" stop-color="#0f172a" stop-opacity="0.8" />
+        </linearGradient>
+
+        <!-- Hex pattern background -->
+        <pattern id="hexGrid" x="0" y="0" width="24" height="20" patternUnits="userSpaceOnUse">
+            <polygon points="12,0 24,6 24,18 12,24 0,18 0,6" fill="none" stroke="#334155" stroke-width="0.4" opacity="0.3" />
+        </pattern>
+    </defs>
+
+    <!-- Base Card Background -->
+    <rect x="1" y="1" width="598" height="318" rx="20" fill="#090d16" stroke="url(#animatedBorder)" stroke-width="2" />
+
+    <!-- Grid pattern background overlay -->
+    <rect x="2" y="2" width="596" height="316" rx="19" fill="url(#hexGrid)" clip-path="url(#cardClip)" />
+
+    <!-- Ambient Center Spotlight Aura -->
+    <circle cx="300" cy="95" r="110" fill="url(#centerAura)" filter="url(#ambientSpotlight)">
+        <animate attributeName="opacity" values="0.6;1;0.6" dur="4s" repeatCount="indefinite" />
+    </circle>
+
+    <!-- ========================================== -->
+    <!-- LEFT TOP CORNER: BIG TOTAL COMMITS BADGE   -->
+    <!-- ========================================== -->
+    <g>
+        <!-- Glass card frame -->
+        <rect x="20" y="22" width="165" height="115" rx="14" fill="url(#heroBoxLeft)" stroke="#00f0ff" stroke-width="1.2" stroke-opacity="0.4" />
+
+        <!-- Flame/Commit Icon & Label -->
+        <g transform="translate(32, 38)">
+            <!-- Flame Icon -->
+            <path d="M7 0C7 0 9 3 9 5.5C9 7.43 7.43 9 5.5 9C3.57 9 2 7.43 2 5.5C2 4.5 2.5 3 3 2.5C2 3.5 1 5 1 7C1 9.76 3.24 12 6 12C8.76 12 11 9.76 11 7C11 3.5 7 0 7 0Z" fill="#00f0ff" filter="url(#cyanGlow)" />
+            <text x="18" y="10" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="#94a3b8" letter-spacing="1">TOTAL COMMITS</text>
+        </g>
+
+        <!-- Big Commits Count -->
+        <text x="102" y="100" text-anchor="middle" font-family="'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="34" fill="#00f0ff" filter="url(#cyanGlow)">{{COMMITS}}</text>
+    </g>
+
+    <!-- ========================================== -->
+    <!-- RIGHT TOP CORNER: BIG TOTAL REPOS BADGE    -->
+    <!-- ========================================== -->
+    <g>
+        <!-- Glass card frame -->
+        <rect x="415" y="22" width="165" height="115" rx="14" fill="url(#heroBoxRight)" stroke="#ec4899" stroke-width="1.2" stroke-opacity="0.4" />
+
+        <!-- Repo Box Icon & Label -->
+        <g transform="translate(427, 38)">
+            <!-- Repo Folder Icon -->
+            <path d="M2 2C1.45 2 1 2.45 1 3V11C1 11.55 1.45 12 2 12H12C12.55 12 13 11.55 13 11V5C13 4.45 12.55 4 12 4H7L5 2H2Z" fill="#ec4899" filter="url(#magentaGlow)" />
+            <text x="18" y="10" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="#94a3b8" letter-spacing="1">TOTAL REPOS</text>
+        </g>
+
+        <!-- Big Repos Count -->
+        <text x="497" y="100" text-anchor="middle" font-family="'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="34" fill="#ec4899" filter="url(#magentaGlow)">{{TOTAL_REPOS}}</text>
+    </g>
+
+    <!-- ========================================== -->
+    <!-- CENTER DP AVATAR & USER PROFILE INFO       -->
+    <!-- ========================================== -->
+    <g>
+        <!-- Outer Rotating Cyber Ring -->
+        <circle cx="300" cy="95" r="54" stroke="url(#cyanMagentaGrad)" stroke-width="2.5" fill="none" stroke-dasharray="14 10">
+            <animateTransform attributeName="transform" type="rotate" from="0 300 95" to="360 300 95" dur="12s" repeatCount="indefinite" />
+        </circle>
+
+        <!-- Inner Pulsating Glowing Ring -->
+        <circle cx="300" cy="95" r="48" stroke="#00f0ff" stroke-width="1.5" fill="none" opacity="0.8" filter="url(#cyanGlow)">
+            <animate attributeName="r" values="47;49;47" dur="3s" repeatCount="indefinite" />
+        </circle>
+
+        <!-- Profile Avatar Image -->
+        <image href="{{PROFILE_PICTURE}}" x="256" y="51" width="88" height="88" clip-path="url(#profileClipCenter)" preserveAspectRatio="xMidYMid slice" />
+
+        <!-- User Display Name -->
+        <text x="300" y="168" text-anchor="middle" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="18" fill="#ffffff" filter="url(#textGlow)">{{NAME}}</text>
+
+        <!-- User Handle Badge -->
+        <rect x="230" y="177" width="140" height="20" rx="10" fill="#0f172a" stroke="#00f0ff" stroke-opacity="0.4" stroke-width="1" />
+        <text x="300" y="191" text-anchor="middle" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="12" fill="#00f0ff">@{{USERNAME}}</text>
+    </g>
+
+    <!-- ========================================== -->
+    <!-- BOTTOM STATS ROW (PANEL & BADGES)          -->
+    <!-- ========================================== -->
+    <g transform="translate(20, 215)">
+        <!-- Bottom Panel Glass Background -->
+        <rect x="0" y="0" width="560" height="85" rx="14" fill="url(#bottomPanelGrad)" stroke="#334155" stroke-width="1" />
+
+        <!-- 1. Followers Stat (Left) -->
+        <g transform="translate(45, 20)">
+            <text x="0" y="0" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="#94a3b8" letter-spacing="0.5">FOLLOWERS</text>
+            <text x="0" y="28" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="20" fill="#38bdf8">👥 {{FOLLOWERS}}</text>
+        </g>
+
+        <!-- Separator Line 1 -->
+        <line x1="165" y1="18" x2="165" y2="67" stroke="#334155" stroke-width="1" stroke-dasharray="3 3" />
+
+        <!-- 2. Stars Stat -->
+        <g transform="translate(190, 20)">
+            <text x="0" y="0" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="#94a3b8" letter-spacing="0.5">STARS</text>
+            <text x="0" y="28" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="20" fill="#f59e0b">⭐ {{STARS}}</text>
+        </g>
+
+        <!-- Separator Line 2 -->
+        <line x1="295" y1="18" x2="295" y2="67" stroke="#334155" stroke-width="1" stroke-dasharray="3 3" />
+
+        <!-- 3. Current Streak Stat -->
+        <g transform="translate(315, 20)">
+            <text x="0" y="0" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="#94a3b8" letter-spacing="0.5">CURRENT STREAK</text>
+            <text x="0" y="28" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="20" fill="#f97316">🔥 {{CURRENT_STREAK}} days</text>
+        </g>
+
+        <!-- Separator Line 3 -->
+        <line x1="435" y1="18" x2="435" y2="67" stroke="#334155" stroke-width="1" stroke-dasharray="3 3" />
+
+        <!-- 4. Max Streak Stat (Right) -->
+        <g transform="translate(450, 20)">
+            <text x="0" y="0" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="#94a3b8" letter-spacing="0.5">MAX STREAK</text>
+            <text x="0" y="28" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="20" fill="#a855f7">⚡ {{MAX_STREAK}} days</text>
+        </g>
+    </g>
+</svg>

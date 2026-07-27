@@ -1,0 +1,332 @@
+<svg
+    width="420"
+    height="680"
+    viewBox="0 0 420 680"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <defs>
+        <!-- Font import for high-tech typography -->
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&amp;family=Rajdhani:wght@500;600;700&amp;display=swap');
+
+            .text-title {
+                font-family: 'Orbitron', -apple-system, sans-serif;
+                font-weight: 800;
+            }
+            .text-mono {
+                font-family: 'Rajdhani', monospace, sans-serif;
+                font-weight: 600;
+            }
+
+            @keyframes spinCw {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            @keyframes spinCcw {
+                from { transform: rotate(360deg); }
+                to { transform: rotate(0deg); }
+            }
+            @keyframes pulseGlow {
+                0%, 100% { opacity: 0.4; transform: scale(0.98); }
+                50% { opacity: 0.9; transform: scale(1.02); }
+            }
+            @keyframes liveBlink {
+                0%, 100% { opacity: 1; fill: #00ff88; }
+                50% { opacity: 0.3; fill: #008844; }
+            }
+            @keyframes scanlineAnim {
+                0% { transform: translateY(0px); opacity: 0.2; }
+                50% { opacity: 0.8; }
+                100% { transform: translateY(680px); opacity: 0.2; }
+            }
+            @keyframes borderGlowPulse {
+                0%, 100% { stroke-opacity: 0.7; filter: drop-shadow(0 0 8px rgba(0,240,255,0.4)); }
+                50% { stroke-opacity: 1; filter: drop-shadow(0 0 16px rgba(168,85,247,0.7)); }
+            }
+            @keyframes meterFlow {
+                0% { stroke-dashoffset: 200; }
+                100% { stroke-dashoffset: 0; }
+            }
+
+            .spin-cw {
+                transform-origin: 210px 135px;
+                animation: spinCw 12s linear infinite;
+            }
+            .spin-ccw {
+                transform-origin: 210px 135px;
+                animation: spinCcw 18s linear infinite;
+            }
+            .live-led {
+                animation: liveBlink 1.5s ease-in-out infinite;
+            }
+            .scan-line {
+                animation: scanlineAnim 4s linear infinite;
+            }
+            .card-border {
+                animation: borderGlowPulse 5s ease-in-out infinite;
+            }
+        </style>
+
+        <!-- Clips -->
+        <clipPath id="cardClip">
+            <rect x="0" y="0" width="420" height="680" rx="24" />
+        </clipPath>
+        <clipPath id="profileClip">
+            <circle cx="210" cy="135" r="48" />
+        </clipPath>
+
+        <!-- Gradients -->
+        <linearGradient id="obsidianBg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#050814" />
+            <stop offset="40%" stop-color="#0a0f24" />
+            <stop offset="80%" stop-color="#0d1430" />
+            <stop offset="100%" stop-color="#050711" />
+        </linearGradient>
+
+        <linearGradient id="cyberBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00f0ff">
+                <animate attributeName="stop-color" values="#00f0ff;#a855f7;#ff2a85;#00f0ff" dur="6s" repeatCount="indefinite" />
+            </stop>
+            <stop offset="50%" stop-color="#3b82f6" />
+            <stop offset="100%" stop-color="#ff2a85">
+                <animate attributeName="stop-color" values="#ff2a85;#00f0ff;#a855f7;#ff2a85" dur="6s" repeatCount="indefinite" />
+            </stop>
+        </linearGradient>
+
+        <linearGradient id="cyanPanel" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.12" />
+            <stop offset="100%" stop-color="#00f0ff" stop-opacity="0.02" />
+        </linearGradient>
+
+        <linearGradient id="purplePanel" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#a855f7" stop-opacity="0.15" />
+            <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.03" />
+        </linearGradient>
+
+        <linearGradient id="flamePanel" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ff2a85" stop-opacity="0.15" />
+            <stop offset="100%" stop-color="#ff7300" stop-opacity="0.03" />
+        </linearGradient>
+
+        <linearGradient id="goldPanel" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffd700" stop-opacity="0.15" />
+            <stop offset="100%" stop-color="#ff9900" stop-opacity="0.03" />
+        </linearGradient>
+
+        <linearGradient id="cyanBarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#00f0ff" />
+            <stop offset="100%" stop-color="#a855f7" />
+        </linearGradient>
+
+        <linearGradient id="flameBarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ff2a85" />
+            <stop offset="100%" stop-color="#ff9900" />
+        </linearGradient>
+
+        <!-- Filters -->
+        <filter id="neonCyanGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feFlood flood-color="#00f0ff" flood-opacity="0.8" result="color" />
+            <feComposite in="color" in2="blur" operator="in" result="glow" />
+            <feMerge>
+                <feMergeNode in="glow" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+
+        <filter id="magentaGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feFlood flood-color="#ff2a85" flood-opacity="0.8" result="color" />
+            <feComposite in="color" in2="blur" operator="in" result="glow" />
+            <feMerge>
+                <feMergeNode in="glow" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+
+        <filter id="goldGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feFlood flood-color="#ffd700" flood-opacity="0.8" result="color" />
+            <feComposite in="color" in2="blur" operator="in" result="glow" />
+            <feMerge>
+                <feMergeNode in="glow" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+
+        <filter id="ambientCoreGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="30" />
+        </filter>
+    </defs>
+
+    <!-- Main Outer Container -->
+    <g clip-path="url(#cardClip)">
+        <!-- Background Layer -->
+        <rect x="0" y="0" width="420" height="680" fill="url(#obsidianBg)" />
+
+        <!-- Sci-Fi Grid Mesh -->
+        <g opacity="0.07">
+            <path d="M 0,40 L 420,40 M 0,80 L 420,80 M 0,120 L 420,120 M 0,160 L 420,160 M 0,200 L 420,200 M 0,240 L 420,240 M 0,280 L 420,280 M 0,320 L 420,320 M 0,360 L 420,360 M 0,400 L 420,400 M 0,440 L 420,440 M 0,480 L 420,480 M 0,520 L 420,520 M 0,560 L 420,560 M 0,600 L 420,600 M 0,640 L 420,640" stroke="#00f0ff" stroke-width="1" />
+            <path d="M 40,0 L 40,680 M 80,0 L 80,680 M 120,0 L 120,680 M 160,0 L 160,680 M 200,0 L 200,680 M 240,0 L 240,680 M 280,0 L 280,680 M 320,0 L 320,680 M 360,0 L 360,680 M 400,0 L 400,680" stroke="#00f0ff" stroke-width="1" />
+        </g>
+
+        <!-- Ambient Glow Core Behind Avatar -->
+        <circle cx="210" cy="135" r="90" fill="#00f0ff" opacity="0.18" filter="url(#ambientCoreGlow)" />
+        <circle cx="210" cy="135" r="60" fill="#a855f7" opacity="0.15" filter="url(#ambientCoreGlow)" />
+
+        <!-- Laser Scanline Animation -->
+        <line x1="0" y1="0" x2="420" y2="0" stroke="#00f0ff" stroke-width="2" opacity="0.6" class="scan-line" filter="url(#neonCyanGlow)" />
+
+        <!-- Outer Animated Card Border -->
+        <rect x="2" y="2" width="416" height="676" rx="23" fill="none" stroke="url(#cyberBorder)" stroke-width="2.5" class="card-border" />
+
+        <!-- Sci-Fi Corner Brackets -->
+        <!-- Top Left -->
+        <path d="M 12 32 L 12 16 L 32 16" fill="none" stroke="#00f0ff" stroke-width="2.5" stroke-linecap="round" />
+        <!-- Top Right -->
+        <path d="M 388 16 L 408 16 L 408 32" fill="none" stroke="#00f0ff" stroke-width="2.5" stroke-linecap="round" />
+        <!-- Bottom Left -->
+        <path d="M 12 648 L 12 664 L 32 664" fill="none" stroke="#00f0ff" stroke-width="2.5" stroke-linecap="round" />
+        <!-- Bottom Right -->
+        <path d="M 388 664 L 408 664 L 408 648" fill="none" stroke="#00f0ff" stroke-width="2.5" stroke-linecap="round" />
+
+        <!-- HEADER BAR: Operative Rank Status -->
+        <g id="headerBar">
+            <rect x="24" y="24" width="372" height="34" rx="8" fill="url(#cyanPanel)" stroke="#00f0ff" stroke-opacity="0.3" stroke-width="1" />
+            
+            <!-- Live Status LED -->
+            <circle cx="42" cy="41" r="4.5" class="live-led" />
+            <circle cx="42" cy="41" r="8" fill="none" stroke="#00ff88" stroke-opacity="0.4" stroke-width="1" />
+
+            <text x="58" y="45" fill="#00ff88" class="text-mono" font-size="11" letter-spacing="1.5">STATUS: ONLINE // S-RANK</text>
+            <text x="382" y="45" fill="#a855f7" class="text-mono" font-size="11" letter-spacing="1.5" text-anchor="end">SYS.ID #8809</text>
+        </g>
+
+        <!-- AVATAR HUD CORE SECTION -->
+        <g id="avatarCore">
+            <!-- Counter-Rotating Outer Radar Ring -->
+            <circle cx="210" cy="135" r="64" fill="none" stroke="#00f0ff" stroke-width="1.5" stroke-dasharray="8 6 4 6" opacity="0.7" class="spin-cw" />
+            <circle cx="210" cy="135" r="57" fill="none" stroke="#ff2a85" stroke-width="1.2" stroke-dasharray="15 10 5 10" opacity="0.6" class="spin-ccw" />
+            <circle cx="210" cy="135" r="51" fill="none" stroke="#ffffff" stroke-dasharray="2 4" opacity="0.4" />
+
+            <!-- Profile Image -->
+            <image href="{{PROFILE_PICTURE}}" x="162" y="87" width="96" height="96" clip-path="url(#profileClip)" />
+            <circle cx="210" cy="135" r="48" fill="none" stroke="#00f0ff" stroke-width="2" filter="url(#neonCyanGlow)" />
+
+            <!-- Cybernetic Ring Crosshairs -->
+            <line x1="210" y1="65" x2="210" y2="73" stroke="#00f0ff" stroke-width="2" />
+            <line x1="210" y1="197" x2="210" y2="205" stroke="#00f0ff" stroke-width="2" />
+            <line x1="140" y1="135" x2="148" y2="135" stroke="#00f0ff" stroke-width="2" />
+            <line x1="272" y1="135" x2="280" y2="135" stroke="#00f0ff" stroke-width="2" />
+        </g>
+
+        <!-- USER IDENTIFICATION -->
+        <g id="userIdentity" text-anchor="middle">
+            <!-- Name -->
+            <text x="210" y="222" fill="#ffffff" class="text-title" font-size="20" letter-spacing="1" filter="url(#neonCyanGlow)">{{NAME}}</text>
+            <!-- Handle -->
+            <text x="210" y="242" fill="#00f0ff" class="text-mono" font-size="14" letter-spacing="2">@{{USERNAME}}</text>
+            <!-- Role Badge Pill -->
+            <rect x="135" y="252" width="150" height="22" rx="11" fill="url(#purplePanel)" stroke="#a855f7" stroke-width="1" />
+            <text x="210" y="267" fill="#f0abfc" class="text-mono" font-size="10" letter-spacing="2">⚡ GITHUB OPERATIVE</text>
+        </g>
+
+        <!-- SECTION 1: COMMITS PERFORMANCE ENERGY BAR -->
+        <g id="commitsSection" transform="translate(24, 290)">
+            <rect x="0" y="0" width="372" height="74" rx="14" fill="url(#cyanPanel)" stroke="#00f0ff" stroke-opacity="0.3" stroke-width="1" />
+            
+            <path d="M 16 18 L 26 18 L 21 28 Z" fill="#00f0ff" />
+            <text x="34" y="24" fill="#88d8ff" class="text-mono" font-size="11" letter-spacing="1.5">TOTAL CONTRIBUTIONS</text>
+            <text x="356" y="26" fill="#00f0ff" class="text-title" font-size="22" text-anchor="end" filter="url(#neonCyanGlow)">{{COMMITS}}</text>
+
+            <!-- Cyber Gauge Bar -->
+            <rect x="16" y="42" width="340" height="12" rx="6" fill="#091326" stroke="#00f0ff" stroke-opacity="0.2" stroke-width="1" />
+            <!-- Active Fill -->
+            <rect x="18" y="44" width="280" height="8" rx="4" fill="url(#cyanBarGrad)" filter="url(#neonCyanGlow)" />
+
+            <!-- Segmented Ticks on Bar -->
+            <line x1="86" y1="42" x2="86" y2="54" stroke="#050814" stroke-width="2" />
+            <line x1="154" y1="42" x2="154" y2="54" stroke="#050814" stroke-width="2" />
+            <line x1="222" y1="42" x2="222" y2="54" stroke="#050814" stroke-width="2" />
+            <line x1="290" y1="42" x2="290" y2="54" stroke="#050814" stroke-width="2" />
+        </g>
+
+        <!-- SECTION 2: STREAK HUD METRIC CONTAINER -->
+        <g id="streakSection" transform="translate(24, 376)">
+            <rect x="0" y="0" width="372" height="80" rx="14" fill="url(#flamePanel)" stroke="#ff2a85" stroke-opacity="0.4" stroke-width="1" />
+
+            <!-- Flame Icon Left -->
+            <g transform="translate(18, 16)">
+                <path d="M 12 2 C 12 2 15 7 12 12 C 10 10 8 8 8 5 C 4 9 3 15 6 19 C 8 22 12 23 15 22 C 19 21 21 16 19 12 C 18 10 16 9 16 9 C 16 9 17 12 15 13 C 14 14 12 13 12 11 C 12 8 15 5 12 2 Z" fill="url(#flameBarGrad)" filter="url(#magentaGlow)" />
+            </g>
+
+            <!-- Current Streak Box -->
+            <text x="50" y="32" fill="#ff73a1" class="text-mono" font-size="11" letter-spacing="1">CURRENT STREAK</text>
+            <text x="50" y="58" fill="#ffffff" class="text-title" font-size="20">{{CURRENT_STREAK}} <tspan font-size="12" fill="#ff2a85" class="text-mono">DAYS</tspan></text>
+
+            <!-- Vertical Separator -->
+            <line x1="200" y1="16" x2="200" y2="64" stroke="#ff2a85" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="4 3" />
+
+            <!-- Max Streak Box -->
+            <text x="218" y="32" fill="#ffaa73" class="text-mono" font-size="11" letter-spacing="1">MAXIMUM STREAK</text>
+            <text x="218" y="58" fill="#ffffff" class="text-title" font-size="20">{{MAX_STREAK}} <tspan font-size="12" fill="#ff9900" class="text-mono">DAYS</tspan></text>
+        </g>
+
+        <!-- SECTION 3: MODULAR METRIC TILES (STARS & REPOS & FOLLOWERS) -->
+        <g id="metricsTiles" transform="translate(24, 468)">
+            <!-- Left Tile: Stars -->
+            <g transform="translate(0, 0)">
+                <rect x="0" y="0" width="178" height="74" rx="14" fill="url(#goldPanel)" stroke="#ffd700" stroke-opacity="0.3" stroke-width="1" />
+                <!-- Star Icon -->
+                <path d="M 24 16 L 27 24 L 35 24 L 29 29 L 31 37 L 24 32 L 17 37 L 19 29 L 13 24 L 21 24 Z" fill="#ffd700" filter="url(#goldGlow)" />
+                <text x="44" y="30" fill="#ffe066" class="text-mono" font-size="11" letter-spacing="1">TOTAL STARS</text>
+                <text x="44" y="56" fill="#ffffff" class="text-title" font-size="20">{{STARS}}</text>
+            </g>
+
+            <!-- Right Tile: Repositories -->
+            <g transform="translate(194, 0)">
+                <rect x="0" y="0" width="178" height="74" rx="14" fill="url(#purplePanel)" stroke="#a855f7" stroke-opacity="0.3" stroke-width="1" />
+                <!-- Repo Icon -->
+                <path d="M 22 16 H 32 C 34 16 35 17 35 19 V 33 C 35 35 34 36 32 36 H 22 C 20 36 19 35 19 33 V 19 C 19 17 20 16 22 16 Z M 22 20 V 32 H 32 V 20 Z" fill="#a855f7" filter="url(#magentaGlow)" />
+                <text x="44" y="30" fill="#c084fc" class="text-mono" font-size="11" letter-spacing="1">PUBLIC REPOS</text>
+                <text x="44" y="56" fill="#ffffff" class="text-title" font-size="20">{{TOTAL_REPOS}}</text>
+            </g>
+        </g>
+
+        <!-- SECTION 4: NETWORK FOLLOWERS FULL BAR -->
+        <g id="followersBar" transform="translate(24, 554)">
+            <rect x="0" y="0" width="372" height="48" rx="12" fill="url(#cyanPanel)" stroke="#00f0ff" stroke-opacity="0.25" stroke-width="1" />
+            
+            <!-- User Group Icon -->
+            <path d="M 26 20 A 4 4 0 1 0 26 28 A 4 4 0 1 0 26 20 Z M 18 34 C 18 30 22 29 26 29 C 30 29 34 30 34 34 Z M 34 20 A 3 3 0 1 0 34 26 A 3 3 0 1 0 34 20 Z M 34 28.5 C 36 29.5 38 31 38 34 Z" fill="#00f0ff" filter="url(#neonCyanGlow)" />
+
+            <text x="48" y="29" fill="#88d8ff" class="text-mono" font-size="11" letter-spacing="1.5">NETWORK FOLLOWERS</text>
+            <text x="354" y="31" fill="#ffffff" class="text-title" font-size="18" text-anchor="end">{{FOLLOWERS}}</text>
+        </g>
+
+        <!-- BASE FOOTER: BARCODE & TECH TAGLINE -->
+        <g id="baseFooter" transform="translate(24, 614)">
+            <!-- Barcode Graphic Lines -->
+            <g opacity="0.6" fill="#00f0ff">
+                <rect x="0" y="0" width="3" height="20" />
+                <rect x="5" y="0" width="1.5" height="20" />
+                <rect x="8" y="0" width="4" height="20" />
+                <rect x="14" y="0" width="2" height="20" />
+                <rect x="18" y="0" width="1" height="20" />
+                <rect x="21" y="0" width="5" height="20" />
+                <rect x="28" y="0" width="2" height="20" />
+                <rect x="32" y="0" width="1.5" height="20" />
+                <rect x="35" y="0" width="3" height="20" />
+                <rect x="40" y="0" width="1" height="20" />
+                <rect x="43" y="0" width="4" height="20" />
+                <rect x="49" y="0" width="2" height="20" />
+                <rect x="53" y="0" width="3" height="20" />
+            </g>
+
+            <text x="68" y="14" fill="#a855f7" class="text-mono" font-size="10" letter-spacing="2">TITAN-HUD // VERIFIED PORTRAIT BADGE</text>
+            <text x="372" y="14" fill="#00f0ff" class="text-mono" font-size="10" letter-spacing="1" text-anchor="end">GITSTAT 2026</text>
+        </g>
+
+    </g>
+</svg>

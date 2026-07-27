@@ -211,7 +211,7 @@ def get_user(username: str):
 @app.get("/api/card/{username}")
 def get_card(username: str, theme: str = "github-dark"):
     # Validate theme name to prevent path traversal
-    allowed_themes = {"github-dark", "github-futuristic", "github-cyber-center"}
+    allowed_themes = {"github-dark", "github-futuristic", "github-cyber-center", "github-cyber-portrait"}
     if theme not in allowed_themes:
         theme = "github-dark"
 

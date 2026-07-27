@@ -21,9 +21,10 @@
                         <label for="themeSelect">Choose Theme</label>
                         <div class="select-wrapper">
                             <select id="themeSelect">
-                                <option value="github-dark">🌑 Classic Dark</option>
+                                <option value="github-cyber-portrait" selected>🛡️ Titan Obsidian Cyber-ID (Portrait Badge)</option>
+                                <option value="github-cyber-center">⚡ Cyber Center Apex</option>
                                 <option value="github-futuristic">🔮 Futuristic Holographic</option>
-                                <option value="github-cyber-center" selected>⚡ Cyber Center Apex (New)</option>
+                                <option value="github-dark">🌑 Classic Dark</option>
                             </select>
                         </div>
                     </div>
@@ -75,7 +76,7 @@
         const previewDiv = document.querySelector('.preview');
 
         let currentUsername = '';
-        let currentTheme = 'github-futuristic';
+        let currentTheme = 'github-cyber-portrait';
         const themeSelect = document.getElementById('themeSelect');
         let cardImg = null;
 
@@ -109,7 +110,8 @@
                 if (!cardImg) {
                     cardImg = document.createElement('img');
                     cardImg.style.maxWidth = '90%';
-                    cardImg.style.maxHeight = '200px';
+                    cardImg.style.maxHeight = '480px';
+                    cardImg.style.objectFit = 'contain';
                     cardImg.style.borderRadius = '10px';
                     cardImg.style.marginTop = '10px';
                     cardImg.style.marginBottom = '10px';

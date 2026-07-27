@@ -6,326 +6,520 @@
     xmlns:xlink="http://www.w3.org/1999/xlink">
 
     <defs>
-        <!-- Font import for high-tech typography -->
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&amp;family=Rajdhani:wght@500;600;700&amp;display=swap');
+        <style type="text/css">
+        <![CDATA[
+            @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap');
 
-            .text-title {
-                font-family: 'Orbitron', -apple-system, sans-serif;
-                font-weight: 800;
-            }
-            .text-mono {
-                font-family: 'Rajdhani', monospace, sans-serif;
-                font-weight: 600;
-            }
+            .t-hacker { font-family: 'Share Tech Mono', 'Courier New', monospace; }
+            .t-title  { font-family: 'Orbitron', monospace, sans-serif; font-weight: 900; }
 
-            @keyframes spinCw {
-                from { transform: rotate(0deg); }
-                to { transform: rotate(360deg); }
-            }
-            @keyframes spinCcw {
-                from { transform: rotate(360deg); }
-                to { transform: rotate(0deg); }
-            }
-            @keyframes pulseGlow {
-                0%, 100% { opacity: 0.4; transform: scale(0.98); }
-                50% { opacity: 0.9; transform: scale(1.02); }
-            }
-            @keyframes liveBlink {
-                0%, 100% { opacity: 1; fill: #00ff88; }
-                50% { opacity: 0.3; fill: #008844; }
-            }
-            @keyframes scanlineAnim {
-                0% { transform: translateY(0px); opacity: 0.2; }
-                50% { opacity: 0.8; }
-                100% { transform: translateY(680px); opacity: 0.2; }
-            }
-            @keyframes borderGlowPulse {
-                0%, 100% { stroke-opacity: 0.7; filter: drop-shadow(0 0 8px rgba(0,240,255,0.4)); }
-                50% { stroke-opacity: 1; filter: drop-shadow(0 0 16px rgba(168,85,247,0.7)); }
-            }
-            @keyframes meterFlow {
-                0% { stroke-dashoffset: 200; }
-                100% { stroke-dashoffset: 0; }
-            }
+            /* MATRIX RAIN COLUMNS */
+            @keyframes rain1 { 0%{transform:translateY(-120px)} 100%{transform:translateY(720px)} }
+            @keyframes rain2 { 0%{transform:translateY(-180px)} 100%{transform:translateY(720px)} }
+            @keyframes rain3 { 0%{transform:translateY(-80px)}  100%{transform:translateY(720px)} }
 
-            .spin-cw {
-                transform-origin: 210px 135px;
-                animation: spinCw 12s linear infinite;
+            .mrain1 { animation: rain1 4.2s linear infinite; }
+            .mrain2 { animation: rain2 5.8s linear infinite; }
+            .mrain3 { animation: rain3 3.5s linear infinite; }
+            .mrain4 { animation: rain1 6.1s linear infinite; }
+            .mrain5 { animation: rain2 4.9s linear infinite; }
+            .mrain6 { animation: rain3 5.3s linear infinite; }
+            .mrain7 { animation: rain1 3.8s linear infinite; }
+            .mrain8 { animation: rain2 4.5s linear infinite; }
+            .mrain9 { animation: rain3 6.4s linear infinite; }
+            .mrain10{ animation: rain1 5.1s linear infinite; }
+            .mrain11{ animation: rain2 3.2s linear infinite; }
+            .mrain12{ animation: rain3 4.7s linear infinite; }
+            .mrain13{ animation: rain1 5.5s linear infinite; }
+            .mrain14{ animation: rain2 3.9s linear infinite; }
+            .mrain15{ animation: rain3 4.3s linear infinite; }
+            .mrain16{ animation: rain1 5.7s linear infinite; }
+            .mrain17{ animation: rain2 6.2s linear infinite; }
+            .mrain18{ animation: rain3 3.6s linear infinite; }
+            .mrain19{ animation: rain1 4.8s linear infinite; }
+            .mrain20{ animation: rain2 5.4s linear infinite; }
+
+            /* GLITCH TEXT */
+            @keyframes glitch {
+                0%, 90%, 100% { opacity: 1; transform: translate(0,0) skewX(0deg); }
+                91% { opacity: 0.8; transform: translate(-2px,1px) skewX(-2deg); }
+                93% { opacity: 0.9; transform: translate(2px,-1px) skewX(3deg); }
+                95% { opacity: 0.7; transform: translate(-1px,2px) skewX(-1deg); }
+                97% { opacity: 1; transform: translate(1px,-1px) skewX(0deg); }
             }
-            .spin-ccw {
-                transform-origin: 210px 135px;
-                animation: spinCcw 18s linear infinite;
+            .glitch-text { animation: glitch 4s ease-in-out infinite; }
+
+            /* SCANLINE SWEEP */
+            @keyframes scanSweep {
+                0%   { transform: translateY(-10px); opacity: 0; }
+                10%  { opacity: 0.7; }
+                90%  { opacity: 0.7; }
+                100% { transform: translateY(690px); opacity: 0; }
             }
-            .live-led {
-                animation: liveBlink 1.5s ease-in-out infinite;
+            .scan-sweep { animation: scanSweep 5s linear infinite; }
+
+            /* ROTATING RINGS */
+            @keyframes hexSpin   { from{transform:rotate(0deg)}   to{transform:rotate(360deg)} }
+            @keyframes hexSpinR  { from{transform:rotate(360deg)} to{transform:rotate(0deg)} }
+            .hex-spin  { transform-origin: 210px 158px; animation: hexSpin  10s linear infinite; }
+            .hex-spinR { transform-origin: 210px 158px; animation: hexSpinR 14s linear infinite; }
+
+            /* PULSE AND BLINK */
+            @keyframes termPulse {
+                0%, 100% { opacity: 1; }
+                50%      { opacity: 0; }
             }
-            .scan-line {
-                animation: scanlineAnim 4s linear infinite;
+            .cursor-blink { animation: termPulse 1s step-end infinite; }
+
+            @keyframes ledPulse {
+                0%, 100% { opacity: 1; fill: #00ff41; }
+                50%      { opacity: 0.2; fill: #005500; }
             }
-            .card-border {
-                animation: borderGlowPulse 5s ease-in-out infinite;
+            .led-pulse { animation: ledPulse 1.8s ease-in-out infinite; }
+
+            @keyframes dataFlicker {
+                0%, 95%, 100% { opacity: 0.6; }
+                96% { opacity: 0.1; }
+                97% { opacity: 0.8; }
+                98% { opacity: 0.2; }
             }
+            .data-flicker { animation: dataFlicker 3s ease-in-out infinite; }
+
+            /* BORDER GLOW */
+            @keyframes borderShift {
+                0%, 100% { stroke: #00ff41; stroke-opacity: 1; }
+                33%      { stroke: #00ccff; stroke-opacity: 0.8; }
+                66%      { stroke: #ff0055; stroke-opacity: 0.8; }
+            }
+            .border-glow { animation: borderShift 8s ease-in-out infinite; }
+
+            /* PARTICLE FLOAT */
+            @keyframes floatUp {
+                0%   { transform: translateY(0px); opacity: 0.8; }
+                100% { transform: translateY(-680px); opacity: 0; }
+            }
+            .particle1  { animation: floatUp 8s  linear infinite; }
+            .particle2  { animation: floatUp 12s linear infinite; }
+            .particle3  { animation: floatUp 6s  linear infinite; }
+            .particle4  { animation: floatUp 10s linear infinite; }
+            .particle5  { animation: floatUp 7s  linear infinite; }
+            .particle6  { animation: floatUp 9s  linear infinite; }
+            .particle7  { animation: floatUp 11s linear infinite; }
+            .particle8  { animation: floatUp 5s  linear infinite; }
+        ]]>
         </style>
 
-        <!-- Clips -->
-        <clipPath id="cardClip">
-            <rect x="0" y="0" width="420" height="680" rx="24" />
-        </clipPath>
-        <clipPath id="profileClip">
-            <circle cx="210" cy="135" r="48" />
+        <!-- CLIPS -->
+        <clipPath id="cardClip"><rect x="0" y="0" width="420" height="680" rx="20" /></clipPath>
+        <clipPath id="avatarHexClip">
+            <polygon points="210,110 247,131 247,173 210,194 173,173 173,131" />
         </clipPath>
 
-        <!-- Gradients -->
-        <linearGradient id="obsidianBg" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#050814" />
-            <stop offset="40%" stop-color="#0a0f24" />
-            <stop offset="80%" stop-color="#0d1430" />
-            <stop offset="100%" stop-color="#050711" />
+        <!-- GRADIENTS -->
+        <linearGradient id="bgVoid" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#000000" />
+            <stop offset="30%"  stop-color="#020a02" />
+            <stop offset="60%"  stop-color="#010800" />
+            <stop offset="100%" stop-color="#000000" />
         </linearGradient>
 
-        <linearGradient id="cyberBorder" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#00f0ff">
-                <animate attributeName="stop-color" values="#00f0ff;#a855f7;#ff2a85;#00f0ff" dur="6s" repeatCount="indefinite" />
-            </stop>
-            <stop offset="50%" stop-color="#3b82f6" />
-            <stop offset="100%" stop-color="#ff2a85">
-                <animate attributeName="stop-color" values="#ff2a85;#00f0ff;#a855f7;#ff2a85" dur="6s" repeatCount="indefinite" />
-            </stop>
+        <linearGradient id="termGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#00ff41" />
+            <stop offset="100%" stop-color="#00cc33" />
         </linearGradient>
 
-        <linearGradient id="cyanPanel" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.12" />
-            <stop offset="100%" stop-color="#00f0ff" stop-opacity="0.02" />
+        <linearGradient id="glassDark" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#00ff41" stop-opacity="0.08" />
+            <stop offset="100%" stop-color="#00ff41" stop-opacity="0.02" />
         </linearGradient>
 
-        <linearGradient id="purplePanel" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#a855f7" stop-opacity="0.15" />
-            <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.03" />
+        <linearGradient id="glassCyan" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#00ccff" stop-opacity="0.10" />
+            <stop offset="100%" stop-color="#00ccff" stop-opacity="0.02" />
         </linearGradient>
 
-        <linearGradient id="flamePanel" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ff2a85" stop-opacity="0.15" />
-            <stop offset="100%" stop-color="#ff7300" stop-opacity="0.03" />
+        <linearGradient id="glassRed" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#ff0055" stop-opacity="0.10" />
+            <stop offset="100%" stop-color="#ff0055" stop-opacity="0.02" />
         </linearGradient>
 
-        <linearGradient id="goldPanel" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ffd700" stop-opacity="0.15" />
-            <stop offset="100%" stop-color="#ff9900" stop-opacity="0.03" />
+        <linearGradient id="glassGold" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#ffd700" stop-opacity="0.10" />
+            <stop offset="100%" stop-color="#ffd700" stop-opacity="0.02" />
         </linearGradient>
 
-        <linearGradient id="cyanBarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#00f0ff" />
-            <stop offset="100%" stop-color="#a855f7" />
-        </linearGradient>
-
-        <linearGradient id="flameBarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#ff2a85" />
-            <stop offset="100%" stop-color="#ff9900" />
-        </linearGradient>
-
-        <!-- Filters -->
-        <filter id="neonCyanGlow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="4" result="blur" />
-            <feFlood flood-color="#00f0ff" flood-opacity="0.8" result="color" />
-            <feComposite in="color" in2="blur" operator="in" result="glow" />
-            <feMerge>
-                <feMergeNode in="glow" />
-                <feMergeNode in="SourceGraphic" />
-            </feMerge>
+        <!-- FILTERS -->
+        <filter id="greenGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="3" result="b"/>
+            <feFlood flood-color="#00ff41" flood-opacity="0.9" result="c"/>
+            <feComposite in="c" in2="b" operator="in" result="g"/>
+            <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
-
-        <filter id="magentaGlow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="4" result="blur" />
-            <feFlood flood-color="#ff2a85" flood-opacity="0.8" result="color" />
-            <feComposite in="color" in2="blur" operator="in" result="glow" />
-            <feMerge>
-                <feMergeNode in="glow" />
-                <feMergeNode in="SourceGraphic" />
-            </feMerge>
+        <filter id="cyanGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="3" result="b"/>
+            <feFlood flood-color="#00ccff" flood-opacity="0.8" result="c"/>
+            <feComposite in="c" in2="b" operator="in" result="g"/>
+            <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
-
-        <filter id="goldGlow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="4" result="blur" />
-            <feFlood flood-color="#ffd700" flood-opacity="0.8" result="color" />
-            <feComposite in="color" in2="blur" operator="in" result="glow" />
-            <feMerge>
-                <feMergeNode in="glow" />
-                <feMergeNode in="SourceGraphic" />
-            </feMerge>
+        <filter id="redGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="3" result="b"/>
+            <feFlood flood-color="#ff0055" flood-opacity="0.8" result="c"/>
+            <feComposite in="c" in2="b" operator="in" result="g"/>
+            <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
-
-        <filter id="ambientCoreGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="30" />
+        <filter id="goldGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="3" result="b"/>
+            <feFlood flood-color="#ffd700" flood-opacity="0.8" result="c"/>
+            <feComposite in="c" in2="b" operator="in" result="g"/>
+            <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="ambientGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="30"/>
         </filter>
     </defs>
 
-    <!-- Main Outer Container -->
     <g clip-path="url(#cardClip)">
-        <!-- Background Layer -->
-        <rect x="0" y="0" width="420" height="680" fill="url(#obsidianBg)" />
 
-        <!-- Sci-Fi Grid Mesh -->
-        <g opacity="0.07">
-            <path d="M 0,40 L 420,40 M 0,80 L 420,80 M 0,120 L 420,120 M 0,160 L 420,160 M 0,200 L 420,200 M 0,240 L 420,240 M 0,280 L 420,280 M 0,320 L 420,320 M 0,360 L 420,360 M 0,400 L 420,400 M 0,440 L 420,440 M 0,480 L 420,480 M 0,520 L 420,520 M 0,560 L 420,560 M 0,600 L 420,600 M 0,640 L 420,640" stroke="#00f0ff" stroke-width="1" />
-            <path d="M 40,0 L 40,680 M 80,0 L 80,680 M 120,0 L 120,680 M 160,0 L 160,680 M 200,0 L 200,680 M 240,0 L 240,680 M 280,0 L 280,680 M 320,0 L 320,680 M 360,0 L 360,680 M 400,0 L 400,680" stroke="#00f0ff" stroke-width="1" />
+        <!-- LAYER 0: PURE BLACK VOID -->
+        <rect x="0" y="0" width="420" height="680" fill="url(#bgVoid)" />
+
+        <!-- LAYER 1: MATRIX RAIN (20 columns) -->
+        <g opacity="0.3">
+            <g class="mrain1">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="12">
+                    <tspan x="12" dy="0">0</tspan><tspan x="12" dy="16">1</tspan><tspan x="12" dy="16">&#x30A2;</tspan><tspan x="12" dy="16">0</tspan><tspan x="12" dy="16">&#x30B7;</tspan><tspan x="12" dy="16">1</tspan><tspan x="12" dy="16">0</tspan><tspan x="12" dy="16">&#x30AB;</tspan>
+                </text>
+            </g>
+            <g class="mrain2">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="34">
+                    <tspan x="34" dy="0">&#x30A4;</tspan><tspan x="34" dy="16">1</tspan><tspan x="34" dy="16">0</tspan><tspan x="34" dy="16">&#x30A8;</tspan><tspan x="34" dy="16">1</tspan><tspan x="34" dy="16">&#x30B1;</tspan><tspan x="34" dy="16">0</tspan><tspan x="34" dy="16">1</tspan>
+                </text>
+            </g>
+            <g class="mrain3">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="56">
+                    <tspan x="56" dy="0">1</tspan><tspan x="56" dy="16">&#x30B3;</tspan><tspan x="56" dy="16">0</tspan><tspan x="56" dy="16">1</tspan><tspan x="56" dy="16">&#x30B5;</tspan><tspan x="56" dy="16">0</tspan><tspan x="56" dy="16">&#x30B9;</tspan><tspan x="56" dy="16">1</tspan>
+                </text>
+            </g>
+            <g class="mrain4">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="78">
+                    <tspan x="78" dy="0">&#x30BF;</tspan><tspan x="78" dy="16">0</tspan><tspan x="78" dy="16">1</tspan><tspan x="78" dy="16">&#x30C1;</tspan><tspan x="78" dy="16">0</tspan><tspan x="78" dy="16">&#x30C4;</tspan><tspan x="78" dy="16">1</tspan><tspan x="78" dy="16">0</tspan>
+                </text>
+            </g>
+            <g class="mrain5">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="100">
+                    <tspan x="100" dy="0">0</tspan><tspan x="100" dy="16">&#x30C6;</tspan><tspan x="100" dy="16">1</tspan><tspan x="100" dy="16">0</tspan><tspan x="100" dy="16">&#x30CA;</tspan><tspan x="100" dy="16">1</tspan><tspan x="100" dy="16">&#x30CB;</tspan><tspan x="100" dy="16">0</tspan>
+                </text>
+            </g>
+            <g class="mrain6">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="122">
+                    <tspan x="122" dy="0">&#x30CC;</tspan><tspan x="122" dy="16">1</tspan><tspan x="122" dy="16">0</tspan><tspan x="122" dy="16">&#x30CD;</tspan><tspan x="122" dy="16">1</tspan><tspan x="122" dy="16">&#x30CE;</tspan><tspan x="122" dy="16">0</tspan><tspan x="122" dy="16">&#x30CF;</tspan>
+                </text>
+            </g>
+            <g class="mrain7">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="144">
+                    <tspan x="144" dy="0">1</tspan><tspan x="144" dy="16">&#x30D2;</tspan><tspan x="144" dy="16">0</tspan><tspan x="144" dy="16">1</tspan><tspan x="144" dy="16">&#x30D5;</tspan><tspan x="144" dy="16">0</tspan><tspan x="144" dy="16">&#x30D8;</tspan><tspan x="144" dy="16">1</tspan>
+                </text>
+            </g>
+            <g class="mrain8">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="166">
+                    <tspan x="166" dy="0">&#x30DB;</tspan><tspan x="166" dy="16">0</tspan><tspan x="166" dy="16">&#x30DE;</tspan><tspan x="166" dy="16">1</tspan><tspan x="166" dy="16">&#x30DF;</tspan><tspan x="166" dy="16">0</tspan><tspan x="166" dy="16">1</tspan><tspan x="166" dy="16">&#x30E0;</tspan>
+                </text>
+            </g>
+            <g class="mrain9">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="188">
+                    <tspan x="188" dy="0">0</tspan><tspan x="188" dy="16">&#x30E1;</tspan><tspan x="188" dy="16">1</tspan><tspan x="188" dy="16">&#x30E2;</tspan><tspan x="188" dy="16">0</tspan><tspan x="188" dy="16">1</tspan><tspan x="188" dy="16">&#x30E4;</tspan><tspan x="188" dy="16">0</tspan>
+                </text>
+            </g>
+            <g class="mrain10">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="210">
+                    <tspan x="210" dy="0">&#x30E6;</tspan><tspan x="210" dy="16">1</tspan><tspan x="210" dy="16">0</tspan><tspan x="210" dy="16">&#x30E8;</tspan><tspan x="210" dy="16">1</tspan><tspan x="210" dy="16">&#x30E9;</tspan><tspan x="210" dy="16">0</tspan><tspan x="210" dy="16">&#x30EA;</tspan>
+                </text>
+            </g>
+            <g class="mrain11">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="232">
+                    <tspan x="232" dy="0">1</tspan><tspan x="232" dy="16">&#x30EB;</tspan><tspan x="232" dy="16">0</tspan><tspan x="232" dy="16">1</tspan><tspan x="232" dy="16">&#x30EC;</tspan><tspan x="232" dy="16">0</tspan><tspan x="232" dy="16">&#x30ED;</tspan><tspan x="232" dy="16">1</tspan>
+                </text>
+            </g>
+            <g class="mrain12">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="254">
+                    <tspan x="254" dy="0">&#x30EF;</tspan><tspan x="254" dy="16">0</tspan><tspan x="254" dy="16">1</tspan><tspan x="254" dy="16">&#x30F2;</tspan><tspan x="254" dy="16">0</tspan><tspan x="254" dy="16">&#x30F3;</tspan><tspan x="254" dy="16">1</tspan><tspan x="254" dy="16">0</tspan>
+                </text>
+            </g>
+            <g class="mrain13">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="276">
+                    <tspan x="276" dy="0">0</tspan><tspan x="276" dy="16">&#x30A2;</tspan><tspan x="276" dy="16">1</tspan><tspan x="276" dy="16">0</tspan><tspan x="276" dy="16">&#x30AD;</tspan><tspan x="276" dy="16">1</tspan><tspan x="276" dy="16">&#x30AF;</tspan><tspan x="276" dy="16">0</tspan>
+                </text>
+            </g>
+            <g class="mrain14">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="298">
+                    <tspan x="298" dy="0">&#x30BB;</tspan><tspan x="298" dy="16">1</tspan><tspan x="298" dy="16">0</tspan><tspan x="298" dy="16">&#x30BD;</tspan><tspan x="298" dy="16">1</tspan><tspan x="298" dy="16">&#x30BF;</tspan><tspan x="298" dy="16">0</tspan><tspan x="298" dy="16">1</tspan>
+                </text>
+            </g>
+            <g class="mrain15">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="320">
+                    <tspan x="320" dy="0">1</tspan><tspan x="320" dy="16">&#x30C6;</tspan><tspan x="320" dy="16">0</tspan><tspan x="320" dy="16">&#x30C8;</tspan><tspan x="320" dy="16">1</tspan><tspan x="320" dy="16">0</tspan><tspan x="320" dy="16">&#x30CB;</tspan><tspan x="320" dy="16">1</tspan>
+                </text>
+            </g>
+            <g class="mrain16">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="342">
+                    <tspan x="342" dy="0">&#x30CF;</tspan><tspan x="342" dy="16">0</tspan><tspan x="342" dy="16">1</tspan><tspan x="342" dy="16">&#x30D5;</tspan><tspan x="342" dy="16">0</tspan><tspan x="342" dy="16">&#x30D8;</tspan><tspan x="342" dy="16">1</tspan><tspan x="342" dy="16">&#x30DB;</tspan>
+                </text>
+            </g>
+            <g class="mrain17">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="364">
+                    <tspan x="364" dy="0">0</tspan><tspan x="364" dy="16">&#x30DE;</tspan><tspan x="364" dy="16">1</tspan><tspan x="364" dy="16">0</tspan><tspan x="364" dy="16">&#x30DF;</tspan><tspan x="364" dy="16">1</tspan><tspan x="364" dy="16">&#x30E0;</tspan><tspan x="364" dy="16">0</tspan>
+                </text>
+            </g>
+            <g class="mrain18">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="386">
+                    <tspan x="386" dy="0">&#x30E1;</tspan><tspan x="386" dy="16">1</tspan><tspan x="386" dy="16">&#x30E2;</tspan><tspan x="386" dy="16">0</tspan><tspan x="386" dy="16">&#x30E4;</tspan><tspan x="386" dy="16">1</tspan><tspan x="386" dy="16">0</tspan><tspan x="386" dy="16">&#x30E6;</tspan>
+                </text>
+            </g>
+            <g class="mrain19">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="408">
+                    <tspan x="408" dy="0">1</tspan><tspan x="408" dy="16">&#x30E8;</tspan><tspan x="408" dy="16">0</tspan><tspan x="408" dy="16">&#x30E9;</tspan><tspan x="408" dy="16">1</tspan><tspan x="408" dy="16">&#x30EA;</tspan><tspan x="408" dy="16">0</tspan><tspan x="408" dy="16">1</tspan>
+                </text>
+            </g>
+            <g class="mrain20">
+                <text font-family="'Share Tech Mono', monospace" font-size="13" fill="#00ff41" x="24">
+                    <tspan x="24" dy="0">&#x30EB;</tspan><tspan x="24" dy="16">0</tspan><tspan x="24" dy="16">&#x30EC;</tspan><tspan x="24" dy="16">1</tspan><tspan x="24" dy="16">&#x30ED;</tspan><tspan x="24" dy="16">0</tspan><tspan x="24" dy="16">&#x30EF;</tspan><tspan x="24" dy="16">1</tspan>
+                </text>
+            </g>
         </g>
 
-        <!-- Ambient Glow Core Behind Avatar -->
-        <circle cx="210" cy="135" r="90" fill="#00f0ff" opacity="0.18" filter="url(#ambientCoreGlow)" />
-        <circle cx="210" cy="135" r="60" fill="#a855f7" opacity="0.15" filter="url(#ambientCoreGlow)" />
-
-        <!-- Laser Scanline Animation -->
-        <line x1="0" y1="0" x2="420" y2="0" stroke="#00f0ff" stroke-width="2" opacity="0.6" class="scan-line" filter="url(#neonCyanGlow)" />
-
-        <!-- Outer Animated Card Border -->
-        <rect x="2" y="2" width="416" height="676" rx="23" fill="none" stroke="url(#cyberBorder)" stroke-width="2.5" class="card-border" />
-
-        <!-- Sci-Fi Corner Brackets -->
-        <!-- Top Left -->
-        <path d="M 12 32 L 12 16 L 32 16" fill="none" stroke="#00f0ff" stroke-width="2.5" stroke-linecap="round" />
-        <!-- Top Right -->
-        <path d="M 388 16 L 408 16 L 408 32" fill="none" stroke="#00f0ff" stroke-width="2.5" stroke-linecap="round" />
-        <!-- Bottom Left -->
-        <path d="M 12 648 L 12 664 L 32 664" fill="none" stroke="#00f0ff" stroke-width="2.5" stroke-linecap="round" />
-        <!-- Bottom Right -->
-        <path d="M 388 664 L 408 664 L 408 648" fill="none" stroke="#00f0ff" stroke-width="2.5" stroke-linecap="round" />
-
-        <!-- HEADER BAR: Operative Rank Status -->
-        <g id="headerBar">
-            <rect x="24" y="24" width="372" height="34" rx="8" fill="url(#cyanPanel)" stroke="#00f0ff" stroke-opacity="0.3" stroke-width="1" />
-            
-            <!-- Live Status LED -->
-            <circle cx="42" cy="41" r="4.5" class="live-led" />
-            <circle cx="42" cy="41" r="8" fill="none" stroke="#00ff88" stroke-opacity="0.4" stroke-width="1" />
-
-            <text x="58" y="45" fill="#00ff88" class="text-mono" font-size="11" letter-spacing="1.5">STATUS: ONLINE // S-RANK</text>
-            <text x="382" y="45" fill="#a855f7" class="text-mono" font-size="11" letter-spacing="1.5" text-anchor="end">SYS.ID #8809</text>
+        <!-- LAYER 2: CIRCUIT TRACE LINES -->
+        <g opacity="0.12" stroke="#00ff41" stroke-width="1" fill="none">
+            <path d="M 0 40 L 80 40 L 90 50 L 140 50" />
+            <path d="M 420 100 L 340 100 L 330 90 L 280 90" />
+            <path d="M 0 300 L 60 300 L 70 310 L 120 310" />
+            <path d="M 420 480 L 360 480 L 350 470 L 290 470" />
+            <path d="M 0 560 L 50 560 L 60 550 L 100 550" />
+            <path d="M 420 620 L 380 620 L 370 630 L 320 630" />
+            <circle cx="140" cy="50" r="3" fill="#00ff41" />
+            <circle cx="280" cy="90" r="3" fill="#00ff41" />
+            <circle cx="120" cy="310" r="3" fill="#00ff41" />
+            <circle cx="290" cy="470" r="3" fill="#00ff41" />
+            <circle cx="100" cy="550" r="3" fill="#00ff41" />
+            <circle cx="320" cy="630" r="3" fill="#00ff41" />
         </g>
 
-        <!-- AVATAR HUD CORE SECTION -->
-        <g id="avatarCore">
-            <!-- Counter-Rotating Outer Radar Ring -->
-            <circle cx="210" cy="135" r="64" fill="none" stroke="#00f0ff" stroke-width="1.5" stroke-dasharray="8 6 4 6" opacity="0.7" class="spin-cw" />
-            <circle cx="210" cy="135" r="57" fill="none" stroke="#ff2a85" stroke-width="1.2" stroke-dasharray="15 10 5 10" opacity="0.6" class="spin-ccw" />
-            <circle cx="210" cy="135" r="51" fill="none" stroke="#ffffff" stroke-dasharray="2 4" opacity="0.4" />
-
-            <!-- Profile Image -->
-            <image href="{{PROFILE_PICTURE}}" x="162" y="87" width="96" height="96" clip-path="url(#profileClip)" />
-            <circle cx="210" cy="135" r="48" fill="none" stroke="#00f0ff" stroke-width="2" filter="url(#neonCyanGlow)" />
-
-            <!-- Cybernetic Ring Crosshairs -->
-            <line x1="210" y1="65" x2="210" y2="73" stroke="#00f0ff" stroke-width="2" />
-            <line x1="210" y1="197" x2="210" y2="205" stroke="#00f0ff" stroke-width="2" />
-            <line x1="140" y1="135" x2="148" y2="135" stroke="#00f0ff" stroke-width="2" />
-            <line x1="272" y1="135" x2="280" y2="135" stroke="#00f0ff" stroke-width="2" />
+        <!-- LAYER 3: FLOATING PARTICLES -->
+        <g>
+            <circle cx="45"  cy="600" r="1.5" fill="#00ff41" opacity="0.6" class="particle1" />
+            <circle cx="120" cy="650" r="1"   fill="#00ccff" opacity="0.5" class="particle2" />
+            <circle cx="200" cy="670" r="2"   fill="#00ff41" opacity="0.4" class="particle3" />
+            <circle cx="310" cy="620" r="1.5" fill="#ff0055" opacity="0.5" class="particle4" />
+            <circle cx="380" cy="660" r="1"   fill="#00ff41" opacity="0.6" class="particle5" />
+            <circle cx="75"  cy="640" r="1.8" fill="#ffd700" opacity="0.3" class="particle6" />
+            <circle cx="260" cy="680" r="1.2" fill="#00ccff" opacity="0.5" class="particle7" />
+            <circle cx="170" cy="630" r="1.5" fill="#00ff41" opacity="0.4" class="particle8" />
         </g>
 
-        <!-- USER IDENTIFICATION -->
-        <g id="userIdentity" text-anchor="middle">
-            <!-- Name -->
-            <text x="210" y="222" fill="#ffffff" class="text-title" font-size="20" letter-spacing="1" filter="url(#neonCyanGlow)">{{NAME}}</text>
+        <!-- LAYER 4: AMBIENT GLOW BEHIND AVATAR -->
+        <circle cx="210" cy="158" r="80" fill="#00ff41" opacity="0.12" filter="url(#ambientGlow)" />
+        <circle cx="210" cy="158" r="50" fill="#00ccff" opacity="0.08" filter="url(#ambientGlow)" />
+
+        <!-- SCANLINE SWEEP -->
+        <rect x="0" y="0" width="420" height="3" fill="url(#termGreen)" opacity="0.5" class="scan-sweep" filter="url(#greenGlow)" />
+
+        <!-- ANIMATED BORDER -->
+        <rect x="2" y="2" width="416" height="676" rx="19" fill="none" stroke="#00ff41" stroke-width="2" class="border-glow" />
+
+        <!-- CORNER TARGETING BRACKETS -->
+        <g stroke="#00ff41" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.9">
+            <path d="M 14 38 L 14 14 L 38 14" />
+            <path d="M 382 14 L 406 14 L 406 38" />
+            <path d="M 14 642 L 14 666 L 38 666" />
+            <path d="M 382 666 L 406 666 L 406 642" />
+        </g>
+
+        <!-- HEX DATA STRIPS (top encrypted data) -->
+        <g class="data-flicker">
+            <text x="18" y="34" fill="#00ff41" class="t-hacker" font-size="8" opacity="0.5" letter-spacing="1">4F:70:65:72:61:74:69:76:65</text>
+            <text x="402" y="34" fill="#ff0055" class="t-hacker" font-size="8" opacity="0.5" text-anchor="end" letter-spacing="1">0x7E4F:CLASSIFIED</text>
+        </g>
+
+        <!-- HEADER: TERMINAL STATUS BAR -->
+        <g transform="translate(20, 42)">
+            <rect x="0" y="0" width="380" height="32" rx="6" fill="url(#glassDark)" stroke="#00ff41" stroke-opacity="0.4" stroke-width="1" />
+            <!-- Live LED -->
+            <circle cx="16" cy="16" r="4" class="led-pulse" />
+            <circle cx="16" cy="16" r="7" fill="none" stroke="#00ff41" stroke-opacity="0.3" stroke-width="1" />
+            <!-- Terminal prompt -->
+            <text x="30" y="20" fill="#00ff41" class="t-hacker" font-size="11" letter-spacing="1">root@phantom:~$</text>
+            <text x="164" y="20" fill="#00ccff" class="t-hacker" font-size="11" letter-spacing="1">access --granted</text>
+            <!-- Blinking cursor -->
+            <rect x="310" y="9" width="8" height="14" fill="#00ff41" class="cursor-blink" />
+        </g>
+
+        <!-- AVATAR: HEXAGONAL FRAME + RADAR RINGS -->
+        <g id="avatarSection">
+            <!-- Radar ping rings using SVG animate instead of CSS -->
+            <circle cx="210" cy="158" r="50" fill="none" stroke="#00ff41" stroke-width="1" opacity="0">
+                <animate attributeName="r" values="50;85" dur="2.5s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.6;0" dur="2.5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="210" cy="158" r="50" fill="none" stroke="#00ccff" stroke-width="1" opacity="0">
+                <animate attributeName="r" values="50;85" dur="2.5s" begin="0.8s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.6;0" dur="2.5s" begin="0.8s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="210" cy="158" r="50" fill="none" stroke="#ff0055" stroke-width="1" opacity="0">
+                <animate attributeName="r" values="50;85" dur="2.5s" begin="1.6s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.6;0" dur="2.5s" begin="1.6s" repeatCount="indefinite" />
+            </circle>
+
+            <!-- Counter-rotating dashed rings -->
+            <polygon points="210,95 256,123 256,193 210,221 164,193 164,123" fill="none" stroke="#00ff41" stroke-width="1.5" stroke-dasharray="12 6 4 6" opacity="0.5" class="hex-spin" />
+            <polygon points="210,100 250,125 250,191 210,216 170,191 170,125" fill="none" stroke="#ff0055" stroke-width="1" stroke-dasharray="8 8" opacity="0.4" class="hex-spinR" />
+
+            <!-- Inner hex border (static) -->
+            <polygon points="210,110 247,131 247,185 210,206 173,185 173,131" fill="none" stroke="#00ff41" stroke-width="2" filter="url(#greenGlow)" />
+
+            <!-- Profile Image (hexagonal clip) -->
+            <image href="{{PROFILE_PICTURE}}" x="165" y="107" width="90" height="99" clip-path="url(#avatarHexClip)" />
+
+            <!-- Crosshair lines -->
+            <line x1="210" y1="82" x2="210" y2="96"  stroke="#00ff41" stroke-width="1.5" opacity="0.8" />
+            <line x1="210" y1="220" x2="210" y2="234" stroke="#00ff41" stroke-width="1.5" opacity="0.8" />
+            <line x1="148" y1="158" x2="162" y2="158" stroke="#00ff41" stroke-width="1.5" opacity="0.8" />
+            <line x1="258" y1="158" x2="272" y2="158" stroke="#00ff41" stroke-width="1.5" opacity="0.8" />
+
+            <!-- Corner ticks on hex -->
+            <line x1="150" y1="120" x2="158" y2="116" stroke="#00ccff" stroke-width="1" opacity="0.6" />
+            <line x1="262" y1="120" x2="254" y2="116" stroke="#00ccff" stroke-width="1" opacity="0.6" />
+            <line x1="150" y1="196" x2="158" y2="200" stroke="#00ccff" stroke-width="1" opacity="0.6" />
+            <line x1="262" y1="196" x2="254" y2="200" stroke="#00ccff" stroke-width="1" opacity="0.6" />
+        </g>
+
+        <!-- IDENTITY: GLITCH NAME + HANDLE -->
+        <g text-anchor="middle">
+            <!-- Name with glitch effect -->
+            <text x="210" y="260" fill="#ffffff" class="t-title glitch-text" font-size="19" letter-spacing="2" filter="url(#greenGlow)">{{NAME}}</text>
+            <!-- Ghost duplicate for glitch depth -->
+            <text x="212" y="259" fill="#ff0055" class="t-title" font-size="19" letter-spacing="2" opacity="0.15">{{NAME}}</text>
+            <text x="208" y="261" fill="#00ccff" class="t-title" font-size="19" letter-spacing="2" opacity="0.12">{{NAME}}</text>
+
             <!-- Handle -->
-            <text x="210" y="242" fill="#00f0ff" class="text-mono" font-size="14" letter-spacing="2">@{{USERNAME}}</text>
-            <!-- Role Badge Pill -->
-            <rect x="135" y="252" width="150" height="22" rx="11" fill="url(#purplePanel)" stroke="#a855f7" stroke-width="1" />
-            <text x="210" y="267" fill="#f0abfc" class="text-mono" font-size="10" letter-spacing="2">⚡ GITHUB OPERATIVE</text>
+            <text x="210" y="280" fill="#00ff41" class="t-hacker" font-size="14" letter-spacing="3">@{{USERNAME}}</text>
+
+            <!-- Classified badge -->
+            <rect x="140" y="289" width="140" height="22" rx="4" fill="none" stroke="#ff0055" stroke-width="1.2" stroke-dasharray="6 3" />
+            <text x="210" y="304" fill="#ff0055" class="t-hacker" font-size="10" letter-spacing="3">CLASSIFIED</text>
         </g>
 
-        <!-- SECTION 1: COMMITS PERFORMANCE ENERGY BAR -->
-        <g id="commitsSection" transform="translate(24, 290)">
-            <rect x="0" y="0" width="372" height="74" rx="14" fill="url(#cyanPanel)" stroke="#00f0ff" stroke-opacity="0.3" stroke-width="1" />
-            
-            <path d="M 16 18 L 26 18 L 21 28 Z" fill="#00f0ff" />
-            <text x="34" y="24" fill="#88d8ff" class="text-mono" font-size="11" letter-spacing="1.5">TOTAL CONTRIBUTIONS</text>
-            <text x="356" y="26" fill="#00f0ff" class="text-title" font-size="22" text-anchor="end" filter="url(#neonCyanGlow)">{{COMMITS}}</text>
+        <!-- STAT 1: COMMITS -->
+        <g transform="translate(20, 322)">
+            <rect x="0" y="0" width="380" height="66" rx="10" fill="url(#glassDark)" stroke="#00ff41" stroke-opacity="0.35" stroke-width="1" />
 
-            <!-- Cyber Gauge Bar -->
-            <rect x="16" y="42" width="340" height="12" rx="6" fill="#091326" stroke="#00f0ff" stroke-opacity="0.2" stroke-width="1" />
-            <!-- Active Fill -->
-            <rect x="18" y="44" width="280" height="8" rx="4" fill="url(#cyanBarGrad)" filter="url(#neonCyanGlow)" />
+            <text x="14" y="20" fill="#00ff41" class="t-hacker" font-size="10" opacity="0.6">$&gt;</text>
+            <text x="34" y="20" fill="#555555" class="t-hacker" font-size="10">git log --oneline | wc -l</text>
 
-            <!-- Segmented Ticks on Bar -->
-            <line x1="86" y1="42" x2="86" y2="54" stroke="#050814" stroke-width="2" />
-            <line x1="154" y1="42" x2="154" y2="54" stroke="#050814" stroke-width="2" />
-            <line x1="222" y1="42" x2="222" y2="54" stroke="#050814" stroke-width="2" />
-            <line x1="290" y1="42" x2="290" y2="54" stroke="#050814" stroke-width="2" />
+            <text x="14" y="38" fill="#88ffaa" class="t-hacker" font-size="11" letter-spacing="1">TOTAL CONTRIBUTIONS</text>
+            <text x="366" y="38" fill="#00ff41" class="t-title" font-size="22" text-anchor="end" filter="url(#greenGlow)">{{COMMITS}}</text>
+
+            <!-- Progress gauge -->
+            <rect x="14" y="48" width="352" height="8" rx="4" fill="#0a1a0a" stroke="#00ff41" stroke-opacity="0.2" stroke-width="0.5" />
+            <rect x="15" y="49" width="290" height="6" rx="3" fill="url(#termGreen)" filter="url(#greenGlow)" opacity="0.9" />
+            <line x1="103" y1="48" x2="103" y2="56" stroke="#000000" stroke-width="1.5" />
+            <line x1="191" y1="48" x2="191" y2="56" stroke="#000000" stroke-width="1.5" />
+            <line x1="279" y1="48" x2="279" y2="56" stroke="#000000" stroke-width="1.5" />
         </g>
 
-        <!-- SECTION 2: STREAK HUD METRIC CONTAINER -->
-        <g id="streakSection" transform="translate(24, 376)">
-            <rect x="0" y="0" width="372" height="80" rx="14" fill="url(#flamePanel)" stroke="#ff2a85" stroke-opacity="0.4" stroke-width="1" />
+        <!-- STAT 2: STREAKS -->
+        <g transform="translate(20, 398)">
+            <rect x="0" y="0" width="380" height="72" rx="10" fill="url(#glassRed)" stroke="#ff0055" stroke-opacity="0.35" stroke-width="1" />
 
-            <!-- Flame Icon Left -->
-            <g transform="translate(18, 16)">
-                <path d="M 12 2 C 12 2 15 7 12 12 C 10 10 8 8 8 5 C 4 9 3 15 6 19 C 8 22 12 23 15 22 C 19 21 21 16 19 12 C 18 10 16 9 16 9 C 16 9 17 12 15 13 C 14 14 12 13 12 11 C 12 8 15 5 12 2 Z" fill="url(#flameBarGrad)" filter="url(#magentaGlow)" />
+            <!-- Left: Current Streak -->
+            <text x="14" y="18" fill="#ff0055" class="t-hacker" font-size="9" letter-spacing="2" opacity="0.7">$&gt; streak --current</text>
+            <text x="14" y="38" fill="#ff5588" class="t-hacker" font-size="11" letter-spacing="1">CURRENT STREAK</text>
+            <text x="14" y="60" fill="#ffffff" class="t-title" font-size="20">{{CURRENT_STREAK}}<tspan fill="#ff0055" class="t-hacker" font-size="12"> days</tspan></text>
+
+            <!-- Separator -->
+            <line x1="190" y1="10" x2="190" y2="62" stroke="#ff0055" stroke-opacity="0.3" stroke-width="1" stroke-dasharray="3 3" />
+
+            <!-- Right: Max Streak -->
+            <text x="204" y="18" fill="#ff6600" class="t-hacker" font-size="9" letter-spacing="2" opacity="0.7">$&gt; streak --max</text>
+            <text x="204" y="38" fill="#ff9955" class="t-hacker" font-size="11" letter-spacing="1">MAXIMUM STREAK</text>
+            <text x="204" y="60" fill="#ffffff" class="t-title" font-size="20">{{MAX_STREAK}}<tspan fill="#ff6600" class="t-hacker" font-size="12"> days</tspan></text>
+        </g>
+
+        <!-- STAT 3: STARS + REPOS -->
+        <g transform="translate(20, 480)">
+            <!-- Left: Stars -->
+            <g>
+                <rect x="0" y="0" width="184" height="66" rx="10" fill="url(#glassGold)" stroke="#ffd700" stroke-opacity="0.35" stroke-width="1" />
+                <text x="14" y="16" fill="#ffd700" class="t-hacker" font-size="9" letter-spacing="2" opacity="0.7">$&gt; stars --count</text>
+                <path d="M 22 28 L 25 36 L 33 36 L 27 41 L 29 49 L 22 44 L 15 49 L 17 41 L 11 36 L 19 36 Z" fill="#ffd700" filter="url(#goldGlow)" />
+                <text x="42" y="38" fill="#ffe066" class="t-hacker" font-size="11" letter-spacing="1">STARS</text>
+                <text x="42" y="56" fill="#ffffff" class="t-title" font-size="18">{{STARS}}</text>
             </g>
 
-            <!-- Current Streak Box -->
-            <text x="50" y="32" fill="#ff73a1" class="text-mono" font-size="11" letter-spacing="1">CURRENT STREAK</text>
-            <text x="50" y="58" fill="#ffffff" class="text-title" font-size="20">{{CURRENT_STREAK}} <tspan font-size="12" fill="#ff2a85" class="text-mono">DAYS</tspan></text>
-
-            <!-- Vertical Separator -->
-            <line x1="200" y1="16" x2="200" y2="64" stroke="#ff2a85" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="4 3" />
-
-            <!-- Max Streak Box -->
-            <text x="218" y="32" fill="#ffaa73" class="text-mono" font-size="11" letter-spacing="1">MAXIMUM STREAK</text>
-            <text x="218" y="58" fill="#ffffff" class="text-title" font-size="20">{{MAX_STREAK}} <tspan font-size="12" fill="#ff9900" class="text-mono">DAYS</tspan></text>
-        </g>
-
-        <!-- SECTION 3: MODULAR METRIC TILES (STARS & REPOS & FOLLOWERS) -->
-        <g id="metricsTiles" transform="translate(24, 468)">
-            <!-- Left Tile: Stars -->
-            <g transform="translate(0, 0)">
-                <rect x="0" y="0" width="178" height="74" rx="14" fill="url(#goldPanel)" stroke="#ffd700" stroke-opacity="0.3" stroke-width="1" />
-                <!-- Star Icon -->
-                <path d="M 24 16 L 27 24 L 35 24 L 29 29 L 31 37 L 24 32 L 17 37 L 19 29 L 13 24 L 21 24 Z" fill="#ffd700" filter="url(#goldGlow)" />
-                <text x="44" y="30" fill="#ffe066" class="text-mono" font-size="11" letter-spacing="1">TOTAL STARS</text>
-                <text x="44" y="56" fill="#ffffff" class="text-title" font-size="20">{{STARS}}</text>
-            </g>
-
-            <!-- Right Tile: Repositories -->
-            <g transform="translate(194, 0)">
-                <rect x="0" y="0" width="178" height="74" rx="14" fill="url(#purplePanel)" stroke="#a855f7" stroke-opacity="0.3" stroke-width="1" />
-                <!-- Repo Icon -->
-                <path d="M 22 16 H 32 C 34 16 35 17 35 19 V 33 C 35 35 34 36 32 36 H 22 C 20 36 19 35 19 33 V 19 C 19 17 20 16 22 16 Z M 22 20 V 32 H 32 V 20 Z" fill="#a855f7" filter="url(#magentaGlow)" />
-                <text x="44" y="30" fill="#c084fc" class="text-mono" font-size="11" letter-spacing="1">PUBLIC REPOS</text>
-                <text x="44" y="56" fill="#ffffff" class="text-title" font-size="20">{{TOTAL_REPOS}}</text>
+            <!-- Right: Repos -->
+            <g transform="translate(196, 0)">
+                <rect x="0" y="0" width="184" height="66" rx="10" fill="url(#glassCyan)" stroke="#00ccff" stroke-opacity="0.35" stroke-width="1" />
+                <text x="14" y="16" fill="#00ccff" class="t-hacker" font-size="9" letter-spacing="2" opacity="0.7">$&gt; repos --public</text>
+                <rect x="14" y="28" width="16" height="20" rx="3" fill="none" stroke="#00ccff" stroke-width="2" filter="url(#cyanGlow)" />
+                <line x1="14" y1="34" x2="30" y2="34" stroke="#00ccff" stroke-width="1.5" />
+                <text x="40" y="38" fill="#66ddff" class="t-hacker" font-size="11" letter-spacing="1">REPOS</text>
+                <text x="40" y="56" fill="#ffffff" class="t-title" font-size="18">{{TOTAL_REPOS}}</text>
             </g>
         </g>
 
-        <!-- SECTION 4: NETWORK FOLLOWERS FULL BAR -->
-        <g id="followersBar" transform="translate(24, 554)">
-            <rect x="0" y="0" width="372" height="48" rx="12" fill="url(#cyanPanel)" stroke="#00f0ff" stroke-opacity="0.25" stroke-width="1" />
-            
-            <!-- User Group Icon -->
-            <path d="M 26 20 A 4 4 0 1 0 26 28 A 4 4 0 1 0 26 20 Z M 18 34 C 18 30 22 29 26 29 C 30 29 34 30 34 34 Z M 34 20 A 3 3 0 1 0 34 26 A 3 3 0 1 0 34 20 Z M 34 28.5 C 36 29.5 38 31 38 34 Z" fill="#00f0ff" filter="url(#neonCyanGlow)" />
-
-            <text x="48" y="29" fill="#88d8ff" class="text-mono" font-size="11" letter-spacing="1.5">NETWORK FOLLOWERS</text>
-            <text x="354" y="31" fill="#ffffff" class="text-title" font-size="18" text-anchor="end">{{FOLLOWERS}}</text>
+        <!-- STAT 4: FOLLOWERS -->
+        <g transform="translate(20, 556)">
+            <rect x="0" y="0" width="380" height="44" rx="10" fill="url(#glassDark)" stroke="#00ff41" stroke-opacity="0.3" stroke-width="1" />
+            <text x="14" y="16" fill="#00ff41" class="t-hacker" font-size="9" letter-spacing="2" opacity="0.6">$&gt; followers --network</text>
+            <!-- User icon -->
+            <circle cx="22" cy="32" r="5" fill="none" stroke="#00ff41" stroke-width="1.5" filter="url(#greenGlow)" />
+            <path d="M 14 42 Q 14 37 22 37 Q 30 37 30 42" fill="none" stroke="#00ff41" stroke-width="1.5" />
+            <text x="40" y="36" fill="#88ffaa" class="t-hacker" font-size="11" letter-spacing="1">NETWORK</text>
+            <text x="366" y="36" fill="#ffffff" class="t-title" font-size="18" text-anchor="end">{{FOLLOWERS}}</text>
         </g>
 
-        <!-- BASE FOOTER: BARCODE & TECH TAGLINE -->
-        <g id="baseFooter" transform="translate(24, 614)">
-            <!-- Barcode Graphic Lines -->
-            <g opacity="0.6" fill="#00f0ff">
-                <rect x="0" y="0" width="3" height="20" />
-                <rect x="5" y="0" width="1.5" height="20" />
-                <rect x="8" y="0" width="4" height="20" />
-                <rect x="14" y="0" width="2" height="20" />
-                <rect x="18" y="0" width="1" height="20" />
-                <rect x="21" y="0" width="5" height="20" />
-                <rect x="28" y="0" width="2" height="20" />
-                <rect x="32" y="0" width="1.5" height="20" />
-                <rect x="35" y="0" width="3" height="20" />
-                <rect x="40" y="0" width="1" height="20" />
-                <rect x="43" y="0" width="4" height="20" />
-                <rect x="49" y="0" width="2" height="20" />
-                <rect x="53" y="0" width="3" height="20" />
+        <!-- FOOTER: ENCRYPTED SIGNATURE -->
+        <g transform="translate(20, 612)">
+            <!-- Barcode -->
+            <g opacity="0.5" fill="#00ff41">
+                <rect x="0"  y="0" width="2"   height="16" />
+                <rect x="4"  y="0" width="1"   height="16" />
+                <rect x="7"  y="0" width="3"   height="16" />
+                <rect x="12" y="0" width="1.5" height="16" />
+                <rect x="15" y="0" width="1"   height="16" />
+                <rect x="18" y="0" width="4"   height="16" />
+                <rect x="24" y="0" width="2"   height="16" />
+                <rect x="28" y="0" width="1"   height="16" />
+                <rect x="31" y="0" width="3"   height="16" />
+                <rect x="36" y="0" width="1.5" height="16" />
+                <rect x="39" y="0" width="2"   height="16" />
+                <rect x="43" y="0" width="1"   height="16" />
+                <rect x="46" y="0" width="3"   height="16" />
+                <rect x="51" y="0" width="2"   height="16" />
+                <rect x="55" y="0" width="1"   height="16" />
+                <rect x="58" y="0" width="2.5" height="16" />
             </g>
 
-            <text x="68" y="14" fill="#a855f7" class="text-mono" font-size="10" letter-spacing="2">TITAN-HUD // VERIFIED PORTRAIT BADGE</text>
-            <text x="372" y="14" fill="#00f0ff" class="text-mono" font-size="10" letter-spacing="1" text-anchor="end">GITSTAT 2026</text>
+            <text x="70" y="12" fill="#00ff41" class="t-hacker" font-size="9" letter-spacing="2" opacity="0.6">PHANTOM PROTOCOL v4.2</text>
+            <text x="380" y="12" fill="#ff0055" class="t-hacker" font-size="9" letter-spacing="1" text-anchor="end" opacity="0.6">GITSTAT // 2026</text>
+        </g>
+
+        <!-- LAYER 5: ENCRYPTED DATA WATERMARKS -->
+        <g opacity="0.04" class="t-hacker" font-size="7" fill="#00ff41" letter-spacing="1">
+            <text x="20" y="642">7A:65:72:6F:2D:64:61:79:2D:65:78:70:6C:6F:69:74</text>
+            <text x="20" y="654">63:72:79:70:74:6F:2D:73:68:65:6C:6C:2D:61:63:74</text>
+            <text x="20" y="666">72:6F:6F:74:40:70:68:61:6E:74:6F:6D:3A:7E:24:20</text>
+        </g>
+
+        <!-- CRT SCANLINE OVERLAY -->
+        <g opacity="0.04">
+            <line x1="0" y1="0" x2="420" y2="0" stroke="#ffffff" stroke-width="1" />
+            <line x1="0" y1="3" x2="420" y2="3" stroke="#ffffff" stroke-width="1" />
+            <line x1="0" y1="6" x2="420" y2="6" stroke="#ffffff" stroke-width="1" />
+            <line x1="0" y1="9" x2="420" y2="9" stroke="#ffffff" stroke-width="1" />
+            <line x1="0" y1="12" x2="420" y2="12" stroke="#ffffff" stroke-width="1" />
+            <line x1="0" y1="15" x2="420" y2="15" stroke="#ffffff" stroke-width="1" />
+            <line x1="0" y1="18" x2="420" y2="18" stroke="#ffffff" stroke-width="1" />
+            <line x1="0" y1="21" x2="420" y2="21" stroke="#ffffff" stroke-width="1" />
+            <line x1="0" y1="24" x2="420" y2="24" stroke="#ffffff" stroke-width="1" />
         </g>
 
     </g>
